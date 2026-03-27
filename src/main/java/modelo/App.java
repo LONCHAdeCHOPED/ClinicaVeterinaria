@@ -43,6 +43,7 @@ public class App {
                 System.out.println("\nMENU PRINCIPAL:");
                 System.out.println("  1. Insertar datos en la tabla Pacientes");
                 System.out.println("  2. No insertar datos");
+                System.out.println("  3. Leer pacientes");
                 System.out.print("Selecciona una opción: ");
 
                 try {
@@ -57,6 +58,9 @@ public class App {
                             salir = true;
                             System.out.println("No se han insertado datos");
                             break;
+                        case 3:
+                            leerPacientes();
+                            break;
                         default:
                             System.out.println("-> Opción no válida.");
                     }
@@ -66,7 +70,6 @@ public class App {
                 }
             }
             scanner.close();
-
         }
 
     public static void leerPacientes() {
@@ -123,30 +126,23 @@ public class App {
         }
     }
 
-    public static void crearTablaHistorial() {
+    /*
+    public static void crearTablas(){
         String sql = """
-            CREATE TABLE IF NOT EXISTS HistorialClinico (
-                id          SERIAL PRIMARY KEY,
-                fecha       DATE NOT NULL,
-                sintomas    TEXT NOT NULL,
-                diagnostico TEXT NOT NULL,
-                tratamiento TEXT NOT NULL,
-                observaciones TEXT NOT NULL,
-                idPaciente INT
-                CONSTRAINT fk_historial_paciente FOREIGN KEY (idPaciente) REFERENCES Paciente(idPaciente) ON DELETE CASCADE
-            );
+
             """;
         try {
             if (con != null) {
                 Statement st = con.createStatement();
                 st.execute(sql);
                 st.close();
-                System.out.println("✅ Tabla 'pacientestest' creada o ya existente.");
+                System.out.println("✅ Tabla '' creada o ya existente.");
             }
         } catch (SQLException e) {
             System.err.println("ERROR - No se pudo crear la tabla: " + e.getMessage());
         }
-    }
+    } */
+
 }
 
 
