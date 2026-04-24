@@ -126,6 +126,71 @@ public class App {
         }
     }
 
+    // Dentro de modelo.App
+    public static boolean validarUsuario(String user, String pass) {
+        // Hemos ajustado los nombres a: nombreusuario y contraseña
+        String sql = "SELECT * FROM usuario WHERE nombreusuario = ? AND contraseña = ?";
+
+        try {
+            if (con == null || con.isClosed()) testConnection();
+
+            PreparedStatement ps = con.prepareStatement(sql);
+            // Usamos trim() por si la base de datos añadió espacios en blanco (tipo CHAR)
+            ps.setString(1, user.trim());
+            ps.setString(2, pass.trim());
+
+            ResultSet rs = ps.executeQuery();
+
+            if (rs.next()) {
+                System.out.println("✅ Usuario encontrado: " + rs.getString("nombreusuario"));
+                return true;
+            }
+        } catch (SQLException e) {
+            System.err.println("❌ Error en la consulta SQL: " + e.getMessage());
+            e.printStackTrace();
+        }
+        return false;
+    }
+
+
+    public static void crearUsuario(String nombre, String password, String rol) {
+        // 1. Buscamos el último ID para calcular el siguiente
+        int nuevoId = obtenerUltimoId() + 1;
+
+        // 2. Ahora incluimos el idusuario en la sentencia SQL
+        String sql = "INSERT INTO usuario (idusuario, nombreusuario, rol, contraseña) VALUES (?, ?, ?, ?)";
+
+        try {
+            if (con == null || con.isClosed()) testConnection();
+
+            PreparedStatement ps = con.prepareStatement(sql);
+            ps.setInt(1, nuevoId);      // Enviamos el ID calculado
+            ps.setString(2, nombre);
+            ps.setString(3, rol);
+            ps.setString(4, password);
+
+            int filas = ps.executeUpdate();
+            if (filas > 0) {
+                System.out.println("✅ Usuario creado con ID: " + nuevoId);
+            }
+            ps.close();
+        } catch (SQLException e) {
+            System.err.println("❌ Error al insertar: " + e.getMessage());
+        }
+    }
+
+    // Función auxiliar para saber por qué número vamos
+    private static int obtenerUltimoId() {
+        String sql = "SELECT MAX(idusuario) FROM usuario";
+        try (Statement st = con.createStatement(); ResultSet rs = st.executeQuery(sql)) {
+            if (rs.next()) {
+                return rs.getInt(1); // Retorna el número más alto
+            }
+        } catch (SQLException e) {
+            System.err.println("Error consultando último ID: " + e.getMessage());
+        }
+        return 0; // Si la tabla está vacía, empezamos desde 0 (+1 = 1)
+    }
     /*
     public static void crearTablas(){
         String sql = """

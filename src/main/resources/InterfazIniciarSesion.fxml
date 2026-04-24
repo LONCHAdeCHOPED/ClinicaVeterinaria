@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.Cursor?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.text.Font?>
+
+
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" style="-fx-background-color: A6EAFF;" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="vista.IniciarSesionController">
+   <children>
+      <Pane layoutX="194.0" layoutY="91.0" prefHeight="215.0" prefWidth="200.0" style="-fx-background-color: FFFFFF;" />
+      <Label layoutX="213.0" layoutY="116.0" text="Usuario" />
+      <TextField fx:id="idUsr" layoutX="213.0" layoutY="134.0" promptText="Nombre de usuario" />
+      <Label layoutX="213.0" layoutY="173.0" text="Contraseña" />
+      <TextField fx:id="idPasswd" layoutX="213.0" layoutY="191.0" promptText="Introduzca contraseña" />
+      <Button fx:id="idButton" layoutX="213.0" layoutY="236.0" mnemonicParsing="false" onAction="#loginButton" prefHeight="26.0" prefWidth="161.0" text=" Iniciar sesion" textFill="#000000" />
+      <Label layoutX="134.0" layoutY="46.0" prefHeight="32.0" prefWidth="333.0" text=" Sistema de Gestion de Clinica Veterinaria" textFill="#0227e0" textOverrun="CLIP">
+         <font>
+            <Font name="Comic Sans MS Bold" size="15.0" />
+         </font>
+         <cursor>
+            <Cursor fx:constant="NW_RESIZE" />
+         </cursor>
+      </Label>
+   </children>
+</Pane>
