@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.effect.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+
+<Pane fx:controller="vista.CrearPacienteController" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" style="-fx-background-color: #90D5FF;" xmlns="http://javafx.com/javafx/17.0.12" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+      <Button onAction="#guardarPaciente" layoutX="398.0" layoutY="335.0" mnemonicParsing="false" prefHeight="29.0" prefWidth="149.0" text="Crear Paciente" />
+      <Label layoutX="40.0" layoutY="103.0" prefHeight="1.0" prefWidth="54.0" text="NOMBRE" />
+      <TextField fx:id="nombreText" layoutX="117.0" layoutY="99.0" />
+      <Label layoutX="40.0" layoutY="140.0" text="ESPECIE" />
+      <TextField fx:id="especieText" layoutX="117.0" layoutY="136.0" />
+      <Label layoutX="40.0" layoutY="175.0" text="EDAD" />
+      <TextField fx:id="edadText" layoutX="117.0" layoutY="171.0" />
+      <Label layoutX="39.0" layoutY="215.0" text="PROPIETARIO" />
+      <TextField fx:id="propietarioText" layoutX="117.0" layoutY="211.0" />
+      <Label layoutX="159.0" layoutY="37.0" text="CREAR NUEVO PACIENTE" textFill="#4800ff">
+         <font>
+            <Font name="SansSerif Regular" size="20.0" />
+         </font>
+         <effect>
+            <Lighting>
+               <bumpInput>
+                  <Shadow />
+               </bumpInput>
+               <light>
+                  <Light.Distant />
+               </light>
+            </Lighting>
+         </effect>
+      </Label>
+   </children>
+</Pane>

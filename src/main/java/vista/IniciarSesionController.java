@@ -1,9 +1,15 @@
 package vista;
 
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.Alert;
+import javafx.stage.Stage;
 import modelo.App;
 import javafx.scene.control.*;
+
+import java.io.IOException;
 
 public class IniciarSesionController {
     @FXML
@@ -26,7 +32,25 @@ public class IniciarSesionController {
 
         if (esValido){
             System.out.println("Sesión iniciada");
-            idButton.getScene().getWindow().hide();
+            try {
+                // 1. Cargamos el archivo de la pantalla principal
+                FXMLLoader loader = new FXMLLoader(getClass().getResource("/pantallaInicial.fxml"));
+                Parent root = loader.load();
+
+                // 2. Creamos la nueva "escena" y la mostramos en una nueva ventana (Stage)
+                Stage stagePrincipal = new Stage();
+                stagePrincipal.setTitle("Sistema de Gestión - Clínica Veterinaria");
+                stagePrincipal.setScene(new Scene(root));
+                stagePrincipal.show();
+
+                // 3. Cerramos o escondemos la ventana de login actual
+                idButton.getScene().getWindow().hide();
+                // Tip: Si no vas a volver atrás, puedes usar .close() en vez de .hide()
+
+            } catch (IOException e) {
+                System.err.println("❌ Error al cargar la pantalla inicial: " + e.getMessage());
+                e.printStackTrace();
+            }
         } else {
             mostrarAlerta("Error", "Usuario o contraseña no válidos");
         }
