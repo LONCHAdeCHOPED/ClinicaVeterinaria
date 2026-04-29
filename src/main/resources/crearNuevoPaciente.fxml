@@ -5,9 +5,9 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
 
-<Pane fx:controller="vista.CrearPacienteController" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" style="-fx-background-color: #90D5FF;" xmlns="http://javafx.com/javafx/17.0.12" xmlns:fx="http://javafx.com/fxml/1">
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" style="-fx-background-color: A6EAFF;" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="vista.CrearPacienteController">
    <children>
-      <Button onAction="#guardarPaciente" layoutX="398.0" layoutY="335.0" mnemonicParsing="false" prefHeight="29.0" prefWidth="149.0" text="Crear Paciente" />
+      <Button layoutX="398.0" layoutY="335.0" mnemonicParsing="false" onAction="#guardarPaciente" prefHeight="29.0" prefWidth="149.0" style="-fx-background-color: #2196F3; -fx-font-weight: bold; -fx-text-fill: white;" text="Crear Paciente" />
       <Label layoutX="40.0" layoutY="103.0" prefHeight="1.0" prefWidth="54.0" text="NOMBRE" />
       <TextField fx:id="nombreText" layoutX="117.0" layoutY="99.0" />
       <Label layoutX="40.0" layoutY="140.0" text="ESPECIE" />

@@ -14,7 +14,6 @@ public class App {
         public static Connection con;
 
         static ArrayList<Paciente> listaPacientes = new ArrayList<>();
-        // 1. El metodo que contiene la lógica de conexión
         public static void testConnection () {
             String url = "jdbc:postgresql://ep-lively-sunset-aby2qoj7-pooler.eu-west-2.aws.neon.tech:5432/proyecto_alumno6?sslmode=require&channel_binding=require";
             String usuari = "neondb_owner";
@@ -31,9 +30,7 @@ public class App {
             }
         }
 
-        // 2. El punto de entrada que llama al metodo anterior
         public static void main (String[] args){
-            // Ahora el IDE encontrará el metodo porque está definido justo arriba
             testConnection();
             boolean salir = false;
             Scanner scanner = new Scanner(System.in);
@@ -80,7 +77,7 @@ public class App {
                 ResultSet rs = st.executeQuery(sql);
                 System.out.println("\n--- LISTADO DE PACIENTES (Usando Records) ---");
                 while (rs.next()) {
-                    // 1. Creamos el objeto Paciente con los datos de la BD
+
                     Paciente p = new Paciente(
                             rs.getInt("id"),
                             rs.getString("nombre"),
@@ -88,8 +85,7 @@ public class App {
                             rs.getInt("edad"),
                             rs.getString("propietario")
                     );
-                    // 2. Ahora 'p' es un objeto. Podemos imprimirlo directamente
-                    // gracias al toString() autom·tico de los Records.
+
                     System.out.println(p);
                     listaPacientes.add(p);
                 }
@@ -126,16 +122,14 @@ public class App {
         }
     }
 
-    // Dentro de modelo.App
     public static boolean validarUsuario(String user, String pass) {
-        // Hemos ajustado los nombres a: nombreusuario y contraseña
+
         String sql = "SELECT * FROM usuario WHERE nombreusuario = ? AND contraseña = ?";
 
         try {
             if (con == null || con.isClosed()) testConnection();
 
             PreparedStatement ps = con.prepareStatement(sql);
-            // Usamos trim() por si la base de datos añadió espacios en blanco (tipo CHAR)
             ps.setString(1, user.trim());
             ps.setString(2, pass.trim());
 
@@ -154,17 +148,14 @@ public class App {
 
 
     public static void crearUsuario(String nombre, String password, String rol) {
-        // 1. Buscamos el último ID para calcular el siguiente
         int nuevoId = obtenerUltimoId() + 1;
-
-        // 2. Ahora incluimos el idusuario en la sentencia SQL
         String sql = "INSERT INTO usuario (idusuario, nombreusuario, rol, contraseña) VALUES (?, ?, ?, ?)";
 
         try {
             if (con == null || con.isClosed()) testConnection();
 
             PreparedStatement ps = con.prepareStatement(sql);
-            ps.setInt(1, nuevoId);      // Enviamos el ID calculado
+            ps.setInt(1, nuevoId);
             ps.setString(2, nombre);
             ps.setString(3, rol);
             ps.setString(4, password);
@@ -179,17 +170,16 @@ public class App {
         }
     }
 
-    // Función auxiliar para saber por qué número vamos
     private static int obtenerUltimoId() {
         String sql = "SELECT MAX(idusuario) FROM usuario";
         try (Statement st = con.createStatement(); ResultSet rs = st.executeQuery(sql)) {
             if (rs.next()) {
-                return rs.getInt(1); // Retorna el número más alto
+                return rs.getInt(1);
             }
         } catch (SQLException e) {
             System.err.println("Error consultando último ID: " + e.getMessage());
         }
-        return 0; // Si la tabla está vacía, empezamos desde 0 (+1 = 1)
+        return 0;
     }
     /*
     public static void crearTablas(){

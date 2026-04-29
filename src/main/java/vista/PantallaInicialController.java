@@ -25,37 +25,29 @@ public class PantallaInicialController {
 
     @FXML
     public void initialize() {
-        // 1. Vincular columnas con los atributos del Record
         nombreTable.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().nombre()));
         especieTable.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().especie()));
         edadTable.setCellValueFactory(cellData -> new SimpleIntegerProperty(cellData.getValue().edad()).asObject());
         propietarioTable.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().propietario()));
 
-        // 2. Cargar datos
         cargarDatosDeBaseDeDatos();
     }
 
     @FXML
     public void abrirVentanaCrear() {
         try {
-            // 1. Cargar el FXML de la ventana de creación
-            // Asegúrate de que la ruta sea exacta a donde tienes el archivo
             javafx.fxml.FXMLLoader loader = new javafx.fxml.FXMLLoader(getClass().getResource("/crearNuevoPaciente.fxml"));
             javafx.scene.Parent root = loader.load();
 
-            // 2. Crear y configurar la nueva ventana (Stage)
             javafx.stage.Stage stage = new javafx.stage.Stage();
             stage.setTitle("Registrar Nuevo Paciente");
 
-            // Esto hace que la ventana principal no se pueda tocar hasta cerrar esta
             stage.initModality(javafx.stage.Modality.APPLICATION_MODAL);
 
             stage.setScene(new javafx.scene.Scene(root));
 
-            // 3. Mostrar y esperar a que se cierre
             stage.showAndWait();
 
-            // 4. Refrescar la tabla automáticamente al volver
             cargarDatosDeBaseDeDatos();
 
         } catch (java.io.IOException e) {
@@ -66,9 +58,7 @@ public class PantallaInicialController {
 
     private void cargarDatosDeBaseDeDatos() {
         listaPacientes.clear();
-        // ... dentro de cargarDatosDeBaseDeDatos ...
 
-// 1. Añadimos el id al SELECT
         String sql = "SELECT id, nombre, especie, edad, propietario FROM pacientestest";
 
         try {
@@ -79,7 +69,6 @@ public class PantallaInicialController {
             ResultSet rs = st.executeQuery(sql);
 
             while (rs.next()) {
-                // 2. Leemos el id y lo pasamos al Record
                 listaPacientes.add(new Paciente(
                         rs.getInt("id"),             // <--- El ID que se rellena solo en la DB
                         rs.getString("nombre"),

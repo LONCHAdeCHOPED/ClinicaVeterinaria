@@ -33,19 +33,16 @@ public class IniciarSesionController {
         if (esValido){
             System.out.println("Sesión iniciada");
             try {
-                // 1. Cargamos el archivo de la pantalla principal
+
                 FXMLLoader loader = new FXMLLoader(getClass().getResource("/pantallaInicial.fxml"));
                 Parent root = loader.load();
 
-                // 2. Creamos la nueva "escena" y la mostramos en una nueva ventana (Stage)
                 Stage stagePrincipal = new Stage();
                 stagePrincipal.setTitle("Sistema de Gestión - Clínica Veterinaria");
                 stagePrincipal.setScene(new Scene(root));
                 stagePrincipal.show();
 
-                // 3. Cerramos o escondemos la ventana de login actual
                 idButton.getScene().getWindow().hide();
-                // Tip: Si no vas a volver atrás, puedes usar .close() en vez de .hide()
 
             } catch (IOException e) {
                 System.err.println("❌ Error al cargar la pantalla inicial: " + e.getMessage());
